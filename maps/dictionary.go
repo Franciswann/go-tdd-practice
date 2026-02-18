@@ -28,15 +28,15 @@ func (d Dictionary) Search(word string) (string, error) {
 	return definition, nil
 }
 
-// Add adds a new word with its defination to the dictionary
+// Add adds a new word with its definition to the dictionary
 // If the word already exists, it returns ErrWordExists and does not
-// modify the existing defination.
-func (d Dictionary) Add(word, defination string) error {
+// modify the existing definition.
+func (d Dictionary) Add(word, definition string) error {
 	_, err := d.Search(word)
 
 	switch err {
 	case ErrNotFound:
-		d[word] = defination
+		d[word] = definition
 	case nil:
 		return ErrWordExists
 	default:
@@ -44,4 +44,8 @@ func (d Dictionary) Add(word, defination string) error {
 	}
 
 	return nil
+}
+
+func (d Dictionary) Update(word, definition string) {
+	d[word] = definition
 }

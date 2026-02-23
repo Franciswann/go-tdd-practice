@@ -51,6 +51,8 @@ func (d Dictionary) Add(word, definition string) error {
 	return nil
 }
 
+// Update modifies the definition of an existing word in the dictionary.
+// Returns an error if the word does not exist.
 func (d Dictionary) Update(word, definition string) error {
 	_, err := d.Search(word)
 
@@ -64,4 +66,8 @@ func (d Dictionary) Update(word, definition string) error {
 	}
 
 	return nil
+}
+
+func (d Dictionary) Delete(word string) {
+	delete(d, word)
 }

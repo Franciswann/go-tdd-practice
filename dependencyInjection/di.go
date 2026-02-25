@@ -3,7 +3,8 @@ package main
 import (
 	"fmt"
 	"io"
-	"os"
+	"log"
+	"net/http"
 )
 
 // Greet writes a greeting to any io.Writer using dependency injection
@@ -12,6 +13,12 @@ func Greet(writer io.Writer, name string) {
 	fmt.Fprintf(writer, "Hello, %s", name)
 }
 
+func MyGreeterHandler(w http.ResponseWriter, r *http.Request) {
+	Greet(w, "world")
+}
+
+// http://localhost:5001/
 func main() {
-	Greet(os.Stdout, "Elodie")
+	log.Fatal(http.ListenAndServe(":5001", http.HandlerFunc(MyGreeterHandler)))
+	// Greet(os.Stdout, "Elodie")
 }

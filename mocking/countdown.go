@@ -22,8 +22,6 @@ type Sleeper interface {
 	Sleep()
 }
 
-type DefaultSleeper struct{}
-
 type SpyCountdownOperations struct {
 	Calls []string
 }
@@ -38,10 +36,6 @@ type SpyTime struct {
 }
 
 // 3. Methods
-
-func (d *DefaultSleeper) Sleep() {
-	time.Sleep(1 * time.Second)
-}
 
 // Sleep implements Sleeper interface - records each sleep call
 func (s *SpyCountdownOperations) Sleep() {
@@ -77,6 +71,6 @@ func Countdown(out io.Writer, sleeper Sleeper) {
 // 5. main function
 
 func main() {
-	sleeper := &DefaultSleeper{}
+	sleeper := &ConfigurableSleeper{1 * time.Second, time.Sleep}
 	Countdown(os.Stdout, sleeper)
 }

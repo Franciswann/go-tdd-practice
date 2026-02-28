@@ -68,6 +68,26 @@ func Countdown(out io.Writer, sleeper Sleeper) {
 	fmt.Fprintf(out, finalWord)
 }
 
+// Bonus - Example of iterators from go 1.23
+// func Countdown(out io.Writer, sleeper Sleeper) {
+// 	for i := range countDownFrom(3) {
+// 		fmt.Fprintln(out, i)
+// 		sleeper.Sleep()
+// 	}
+
+// 	fmt.Fprint(out, finalWord)
+// }
+
+// func countDownFrom(from int) iter.Seq[int] {
+// 	return func(yield func(int) bool) {
+// 		for i := from; i > 0; i-- {
+// 			if !yield(i) {
+// 				return
+// 			}
+// 		}
+// 	}
+// }
+
 // 5. main function
 
 func main() {

@@ -42,6 +42,6 @@ func BenchmarkCheckWebsites(b *testing.B) {
 	}
 
 	for b.Loop() {
-		CheckWebsites(mockWebsiteChecker, urls)
+		CheckWebsites(slowStubWebsiteChecker, urls)
 	}
 }
